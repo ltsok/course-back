@@ -1,0 +1,28 @@
+#数据库配置信息
+dbIp: 10.45.43.9
+dbPort: 3306
+dbName: ltsok
+dbUser: root
+dbPwd: root
+
+#服务port
+serverPort: 9999
+server:
+  port: ${serverPort}
+  servlet:
+    context-path: ltsok
+
+#mybatis配置
+mybatis:
+  typeAliasesPackage: com.lts.course.entity
+  mapperLocations: classpath*:mapper/*.xml
+
+#datasource配置
+spring:
+  application:
+    name: course
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${dbIp}:${dbPort}/${dbName}?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT
+    username: ${dbUser}
+    password: ${dbPwd}
