@@ -2,27 +2,32 @@ package com.lts.course.controller;
 
 import com.lts.course.entity.User;
 import com.lts.course.service.IUserService;
+import com.lts.course.utils.Result;
+import com.lts.course.utils.ResultUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.apache.log4j.Logger;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/user")
 public class TestBootController {
-    @Resource
+    @Autowired
     private IUserService userService;
 
-    @RequestMapping("/showUser")
-    @ResponseBody
-    public User toIndex(HttpServletRequest request, Model model){
-        int userId = Integer.parseInt(request.getParameter("id"));
+    @GetMapping("/showUser/{id}")
+    public Result toIndex(@PathVariable() Integer id){
+        Logger logger = Logger.getLogger(TestBootController.class);
+        int userId = id;
         User user = this.userService.getUserById(userId);
-        return user;
+//        throw new ResultException(ResultCode.SUCCESS);
+        logger.info("ltsok");
+//        System.out.println(TestBootController.ge);
+        return ResultUtils.success(user);
     }
 }
