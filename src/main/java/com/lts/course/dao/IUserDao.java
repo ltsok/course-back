@@ -7,15 +7,10 @@ import java.util.List;
 
 @Component
 public interface IUserDao {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(User record);
+    User getById(String userId);
 
-    int insertSelective(User record);
+    void addUser(User record);
 
-    User selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
+    void deleteUser(String userId);
 }

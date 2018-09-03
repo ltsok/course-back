@@ -3,6 +3,9 @@ package com.lts.course.service.imp;
 import com.lts.course.dao.IUserDao;
 import com.lts.course.entity.User;
 import com.lts.course.service.IUserService;
+import com.lts.course.utils.Result;
+import com.lts.course.utils.ResultCode;
+import com.lts.course.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,19 +24,23 @@ public class UserServiceImpl implements IUserService {
     private IUserDao userDao;
 
 
-    public User getUserById(int userId) {
-        return userDao.selectByPrimaryKey(userId);
+    public User getById(String userId) {
+        return userDao.getById(userId);
     }
 
-    public boolean addUser(User record){
-        boolean result = false;
-        try {
-            userDao.insertSelective(record);
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
+    public Result addUser(User user){
+
+        //校验用户名
+        if (!user.checkUserName()) {
+            return ResultUtils.warn(ResultCode.PARAMETER_ERROR, "用户名格式不正确");
         }
 
-        return result;
+        userDao.addUser(user);
+        return ResultUtils.success(null);
+    }
+
+    public Result deleteUser(String userId) {
+        userDao.deleteUser(userId);
+        return ResultUtils.success(null);
     }
 }
