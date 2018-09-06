@@ -7,7 +7,10 @@
         <result column="password" property="password"></result>
         <result column="age" property="age"></result>
     </resultMap>
-    <select id="getById" resultMap="userMap" parameterType="java.lang.Integer" >
+    <select id="getAll" resultMap="userMap" >
+        SELECT * FROM users
+    </select>
+    <select id="getById" resultMap="userMap" parameterType="string" >
         SELECT user_id,user_name,password,age FROM users WHERE user_id = #{userId}
     </select>
     <insert id="addUser" parameterType="user" >
@@ -16,22 +19,22 @@
     </insert>
     <delete id="deleteUser" parameterType="string" >
         DELETE FROM users
-        where user_id = #{userId}
+        WHERE user_id = #{userId}
     </delete>
-    <update id="updateByPrimaryKeySelective" parameterType="com.lts.course.entity.User" >
-        update user_t
+    <update id="updateUser" parameterType="user" >
+        UPDATE users
         <set >
             <if test="userName != null" >
-                user_name = #{userName,jdbcType=VARCHAR},
+                user_name = #{userName},
             </if>
             <if test="password != null" >
-                password = #{password,jdbcType=VARCHAR},
+                password = #{password},
             </if>
             <if test="age != null" >
-                age = #{age,jdbcType=INTEGER},
+                age = #{age},
             </if>
         </set>
-        where id = #{id,jdbcType=INTEGER}
+        where user_id = #{userId}
     </update>
 </mapper>
 

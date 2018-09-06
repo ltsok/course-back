@@ -9,7 +9,6 @@ import com.lts.course.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -24,10 +23,17 @@ public class UserServiceImpl implements IUserService {
     private IUserDao userDao;
 
 
+    //获取所有用户
+    public List<User> getAll() {
+        return userDao.getAll();
+    }
+
+    //获取单个用户
     public User getById(String userId) {
         return userDao.getById(userId);
     }
 
+    //新增用户
     public Result addUser(User user){
 
         //校验用户名
@@ -39,8 +45,15 @@ public class UserServiceImpl implements IUserService {
         return ResultUtils.success(null);
     }
 
+    //删除用户
     public Result deleteUser(String userId) {
         userDao.deleteUser(userId);
+        return ResultUtils.success(null);
+    }
+
+    //修改用户
+    public Result updateUser(User user) {
+        userDao.updateUser(user);
         return ResultUtils.success(null);
     }
 }
