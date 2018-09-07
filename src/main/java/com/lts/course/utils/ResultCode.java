@@ -3,7 +3,8 @@ package com.lts.course.utils;
 public enum ResultCode {
 
     SUCCESS(0, "请求成功"),
-    PARAMETER_ERROR(1, "参数不合法");
+    PARAMETER_ERROR(1, "参数不合法"),
+    WEAK_NET_WORK(2, "网络异常,请稍后重试");
 
     private int code;
     private String msg;

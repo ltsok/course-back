@@ -1,11 +1,11 @@
 package com.lts.course.dao;
 
 import com.lts.course.entity.User;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Component
+@Repository
 public interface IUserDao {
 
     //获取所有用户

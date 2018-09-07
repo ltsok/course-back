@@ -28,7 +28,7 @@ public class UserController {
 
     @GetMapping("/all")
     @Access(operation = "查询所有用户")
-    public Result allUsers(){
+    public Result allUsers() {
         logger.info("query all user");
         List<User> user = this.userService.getAll();
         return ResultUtils.success(user);
