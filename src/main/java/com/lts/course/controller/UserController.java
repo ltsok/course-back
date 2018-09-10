@@ -56,13 +56,14 @@ public class UserController {
         return result;
     }
 
-    @PostMapping("/deleteUser")
+    @DeleteMapping("/deleteUser")
     @Access(operation = "删除用户")
-    public Result delete(@RequestBody Integer params) throws IOException {
+    public Result delete(@RequestBody String[] params) throws IOException {
         logger.info("delete user");
 //        if (params == null || params.length <= 0) {
 //            return ResultUtils.warn(ResultCode.PARAMETER_ERROR);
 //        }
+        System.out.println(params);
         Result result = userService.deleteUser("");
         return result;
     }
